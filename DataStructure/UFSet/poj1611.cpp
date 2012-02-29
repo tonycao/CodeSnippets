@@ -1,7 +1,7 @@
 #include <iostream>
 
 using namespace std;
-const int Max_size = 10000;
+const int Max_size = 30001;
 int father[Max_size], rank[Max_size];
 
 //initialize UnionFindSet
