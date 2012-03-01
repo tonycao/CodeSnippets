@@ -5,6 +5,7 @@
 using namespace std;
 
 #define MAXBUFFERSIZE 100
+#define SPACESEPARATOR ' '
 
 // reverse the memory block 
 // goal: |12345| -> |54321|
@@ -66,6 +67,26 @@ void * swapNonAdjacentMemory(void *pMemory, const size_t headSize, const size_t 
     return pMemory;
 }
 
+// reverse words
+// divide and conquer
+void * reverseWords(void *pMemory, const size_t memSize)
+{
+    if(NULL == pMemory) return pMemory;
+    if(memSize < 2) return pMemory;
+
+    char *pStart = reinterpret_cast<char *>(pMemory);
+    for(size_t index = 0; index < memSize; ++index)
+    {
+        if(SPACESEPARATOR == pStart[index])
+        {
+            reverseWords(pStart+index+1, memSize-index-1);
+            swapNonAdjacentMemory(pStart, index, memSize-index-1, memSize);
+            break;
+        }
+    }
+    return pMemory;
+}
+
 // test case
 int main()
 {
@@ -78,7 +99,14 @@ int main()
         "",
         "ab",
         "abc",
-        "abc1234"
+        "abc1234",
+        "ab ",
+        " ab",
+        "a b",
+        "ab cd ef",
+        "ab cd ef ",
+        " ab cd ef",
+        "aaa bbbb ccccc"
     };
 
     void * resultArr = malloc(MAXBUFFERSIZE); // alloc space to store the result
@@ -103,6 +131,16 @@ int main()
         swapNonAdjacentMemory(resultArr, 2,2, strlen(stringArr[i]));
         printf("%s\n", (char*)resultArr);
     }
+
+    //test reverse words
+    for(size_t i = 0; i < arrLen; ++i)
+    {
+        memset(resultArr, 0, MAXBUFFERSIZE);
+        memcpy(resultArr, stringArr[i], strlen(stringArr[i]));
+        reverseWords(resultArr, strlen(stringArr[i]));
+        printf("%s\n", (char*)resultArr);
+    }
+
     free(resultArr);
     return 1;
 }
