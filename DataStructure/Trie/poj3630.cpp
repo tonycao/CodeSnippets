@@ -15,11 +15,7 @@ class Trie
     Trie_node root;
     public:
     Trie(){root = Node[0];}
-    bool insert(char num[]);
-};
-
-bool Trie::insert(char num[])
-{
+    bool insert(char num[])
     {
         Trie_node *location = &root;
         int i = 0;
@@ -47,8 +43,7 @@ bool Trie::insert(char num[])
         location->isExist = true;
         return true;
     }
-
-}
+};
 
 int main()
 {

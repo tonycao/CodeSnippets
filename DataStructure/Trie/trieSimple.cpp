@@ -6,7 +6,8 @@
 
 #define WORDLENMAX 128
 
-struct trie_node_st {
+struct trie_node_st 
+{
     int count;
     struct trie_node_st *next[TREE_WIDTH];
 };
@@ -21,17 +22,21 @@ insert(const char *word)
     int i;
     struct trie_node_st *curr, *newnode;
 
-    if (word[0]=='\0') {
+    if (word[0]=='\0') 
+    {
         return 0;
     }
     curr = &root;
-    for (i=0; ; ++i) {
-        if (curr->next[ word[i] ] == NULL) {
+    for (i=0; ; ++i) 
+    {
+        if (curr->next[ word[i] ] == NULL) 
+        {
             newnode=(struct trie_node_st*)malloc(sizeof(struct trie_node_st));
             memset(newnode, 0, sizeof(struct trie_node_st));
             curr->next[ word[i] ] = newnode;
         }
-        if (word[i] == '\0') {
+        if (word[i] == '\0') 
+        {
             break;
         }
         curr = curr->next[ word[i] ];
@@ -54,14 +59,17 @@ do_travel(struct trie_node_st *rootp)
     static int pos=0;
     int i;
 
-    if (rootp == NULL) {
+    if (rootp == NULL)
+    {
         return 0;
     }
-    if (rootp->count) {
+    if (rootp->count) 
+    {
         worddump[pos]='\0';
         printword(worddump, rootp->count);
     }
-    for (i=0;i<TREE_WIDTH;++i) {
+    for (i=0;i<TREE_WIDTH;++i) 
+    {
         worddump[pos++]=i;
         do_travel(rootp->next[i]);
         pos--;
@@ -76,18 +84,23 @@ main(void)
     size_t bufsize=0;
     int ret;
 
-    while (1) {
+    while (1) 
+    {
         ret=getline(&linebuf, &bufsize, stdin);
-        if (ret==-1) {
+        if (ret==-1) 
+        {
             break;
         }
         line=linebuf;
-        while (1) {
+        while (1) 
+        {
             word = strsep(&line, spaces);
-            if (word==NULL) {
+            if (word==NULL) 
+            {
                 break;
             }
-            if (word[0]=='\0') {
+            if (word[0]=='\0') 
+            {
                 continue;
             }
             insert(word);
