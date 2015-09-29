@@ -1,3 +1,7 @@
+//Write code to remove duplicates from an unsorted linked list.
+//FOLLOW UP
+//How would you solve this problem if a temporary buffer is not allowed?
+
 #include <iostream>
 #include <cstring>
 
@@ -7,6 +11,7 @@ typedef struct node{
     int data;
     node *next;
 }node;
+
 bool hash[100];
 
 node* init(int a[], int n){

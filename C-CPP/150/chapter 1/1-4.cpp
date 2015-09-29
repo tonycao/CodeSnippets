@@ -1,73 +1,62 @@
 #include <iostream>
+//#include <cstdio>
+//#include <cstdlib>
+#include <string>
 #include <cstring>
+#include <algorithm>
 
 using namespace std;
 
-char* replace1(char *c){
-    if(c == NULL) return NULL;
-    int len = strlen(c);
-    if(len == 0) return NULL;
-    int cnt = 0;
-    for(int i=0; i<len; ++i)
-    {
-        if(c[i] == ' ')
-            ++cnt;
-    }
-    char *cc = new char[len+2*cnt+1];
-    int p = 0;
-    for(int i=0; i<len; ++i)
-    {
-        if(c[i] == ' ')
-        {
-            cc[p] = '%';
-            cc[p+1] = '2';
-            cc[p+2] = '0';
-            p += 3;
-        }
-        else
-        {
-            cc[p] = c[i];
-            ++p;
-        }
-    }
-    cc[p] = '\0';
-    return cc;
+bool isAnagram(string s, string t) {
+	if (s == "" || t == "") return false;
+	if (s.length() != t.length()) return false;
+
+	int len = s.length();
+	int c[256];
+	memset(c, 0, sizeof(c));
+
+	transform(s.begin(), s.end(), s.begin(), ::tolower);
+	transform(t.begin(), t.end(), t.begin(), ::tolower);
+
+	for (int i = 0; i < len; i++) {
+		++c[(int)s[i]];
+		//--c[(int)t[i]];
+	}
+
+	for (int i = 0; i < len; i++) {
+		if(--c[(int)t[i]] < 0) return false;
+	}
+
+	//for (int i = 0; i < 256; i++) {
+	//	if (c[i] != 0) return false;
+	//}
+	return true;
 }
 
-void replace2(char *c){
-    if(c == NULL) return;
-    int len = strlen(c);
-    if(len == 0) return;
-    int cnt = 0;
-    for(int i=0; i<len; ++i)
-    {
-        if(c[i] == ' ')
-            ++cnt;
-    }
-    int p = len + 2*cnt;
-    c[p--] = '\0';//the space must be allocated first.
-    for(int i=len-1; i>=0; --i)
-    {
-        if(c[i] == ' ')
-        {
-            c[p] = '0';
-            c[p-1] = '2';
-            c[p-2] = '%';
-            p -= 3;
-        }
-        else
-        {
-            c[p] = c[i];
-            --p;
-        }
-    }
+bool isAnagram2(string s, string t) {
+	if (s == "" || t == "") return false;
+	if (s.length() != t.length()) return false;
+	
+	transform(s.begin(), s.end(), s.begin(), ::tolower);
+	transform(t.begin(), t.end(), t.begin(), ::tolower);
+
+	sort(&s[0], &s[0]+s.length());
+	sort(&t[0], &t[0]+t.length());
+
+	if (s.compare(t) == 0) return true;
+	else return false;
 }
 
-int main(){
-    const int len = 100;
-    char c[len] = "adfa dsafdas d a aa";
-    cout<<replace1(c)<<endl;
-    replace2(c);
-    cout<<c<<endl;
-    return 0;
+//need check the case of the string
+
+int main() {
+
+	string s = "test1";
+	string t = "test11";
+
+	string s2 = "teSt2";
+	string t2 = "Test2";
+
+	cout<< isAnagram(s, t) << endl;
+	cout<< isAnagram2(s2, t2) << endl;
 }

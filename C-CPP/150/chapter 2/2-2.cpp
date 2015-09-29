@@ -1,3 +1,7 @@
+//Implement an algorithm to find the nth to last element of a singly linked list.
+
+
+
 #include <iostream>
 using namespace std;
 
@@ -6,17 +10,17 @@ typedef struct node{
     node *next;
 }node;
 
-node* init(int a[], int n){
+node* init(int a[], int n) {
     node *head, *p;
-    for(int i=0; i < n; ++i){
-    node *nd = new node();
-    nd->data = a[i];
-    if(i==0){
-        head = p = nd;
-        continue;
-    }
-    p->next = nd;
-    p = nd;
+    for(int i=0; i < n; ++i) {
+        node *nd = new node();
+        nd->data = a[i];
+        if(i==0) {
+            head = p = nd;
+            continue;
+        }
+        p->next = nd;
+        p = nd;
     }
     return head;
 }
@@ -25,17 +29,18 @@ node* findNthToLast(node *head, int n){
     if(head==NULL || n < 1) return NULL;
     node *p=head, *q=head;
     while(n > 0 && q){
-    q = q->next;
-    --n;
+        q = q->next;
+        --n;
     }
     if(n > 0) return NULL;
     while(q){
-    p = p->next;
-    q = q->next;
+        p = p->next;
+        q = q->next;
     }
     return p;
 }
 
+// like a stack, using recursion
 node *pp;
 int nn;
 void findNthToLast1(node *head){

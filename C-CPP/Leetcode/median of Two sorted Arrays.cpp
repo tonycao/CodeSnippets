@@ -10,10 +10,10 @@ public:
       }
       else
         return GetMedian(A,m,B,n, (m+n)/2+1);
-       }
+    }
 
-       double GetMedian(int a[], int n, int b[], int m, int k)
-       {
+    double GetMedian(int a[], int n, int b[], int m, int k)
+    {
             assert(a && b);
             if (n <= 0) return b[k-1];
             if (m <= 0) return a[k-1];
