@@ -1,22 +1,22 @@
 class Solution {
 public:
-    void generateSub(vector<int> &s, int step, vector<vector<int>> &result, vector<int> &output){
-        for(int i = step; i < s.size(); ++i){
-            output.push_back(s[i]);
-            result.push_back(output);
-            if(i < s.size() - 1) generateSub(s, i+1, result, output);
-            output.pop_back();
+    vector<vector<int>> subsets(vector<int>& nums) {
+        //DFS: Time ~ O(N!), Space ~ O(N)
+        vector<vector<int>> res;
+        if (nums.empty()) return res;
+        sort(nums.begin(), nums.end());
+        vector<int> sub;
+        dfs(nums, sub, 0, res);
+        return res;
+    }
+    
+private:
+    void dfs(vector<int>& nums, vector<int>& sub, int step, vector<vector<int>>& res) {
+        res.push_back(sub);
+        for (int i = step; i < nums.size(); i++) {
+            sub.push_back(nums[i]);
+            dfs(nums, sub, i + 1, res);
+            sub.pop_back();
         }
-    }
-    vector<vector<int> > subsets(vector<int> &S) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        vector<vector<int>> result;
-        vector<int> output;
-        if(S.size() == 0) return result;
-        result.push_back(output);
-        sort(S.begin(), S.end());
-        generateSub(S, 0, result, output);
-
-        return result;
-    }
+    }    
 };

@@ -1,31 +1,24 @@
 class Solution {
 public:
-    int candy(vector<int> &ratings) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        int len = ratings.size();
-        if(len == 0 ) return 0;
-        if(len == 1) return 1;
-        vector<int> d(len);
-        d[0] = 1;
-
-        for(int i=1; i<len; i++){
-            if(ratings[i] == ratings[i-1]) d[i] = 1;
-            else if(ratings[i] > ratings[i-1]) d[i] = d[i-1] + 1;
-            else{
-                d[i] = 1;
-                if(d[i-1] == 1){
-                    int j = i;
-                    while(j>0 && ratings[j-1] > ratings[j] && d[j-1] == d[j]){
-                        d[j-1]++;
-                        j--;
-                    }
-                }
-            }
+    int candy(vector<int>& ratings) {
+        //Greedy Algorithm: Time ~ O(3N), Space ~ O(N)
+        const int n = ratings.size();
+        vector<int> candy(n, 1);
+        
+        // method 1
+        // scan from start from left and right respectively
+        for (int i = 1; i < n; i++) {
+            if (ratings[i] > ratings[i - 1])  // ascending
+                candy[i] = candy[i - 1] + 1;
         }
-        int sum = 0;
-        for(int i = 0; i<ratings.size(); i++){
-            sum += d[i];
+        
+        for (int i = n - 2; i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1] && candy[i] <= candy[i + 1])  // descending
+                candy[i] = candy[i + 1] + 1;
         }
-        return sum;
+        
+        
+        // return with initial n candy
+        return accumulate(&candy[0], &candy[0] + n, 0);
     }
 };
