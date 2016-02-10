@@ -1,5 +1,5 @@
 /**
- * Definition for binary tree
+ * Definition for a binary tree node.
  * struct TreeNode {
  *     int val;
  *     TreeNode *left;
@@ -9,40 +9,73 @@
  */
 class Solution {
 public:
-    vector<int> inorderTraversal2(TreeNode *root) {
+    vector<int> inorderTraversal(TreeNode* root) {
         vector<int> res;
         if (root == nullptr) return res;
+        // method 1: recursive
+        //return inorder(root, res);
         
-        return inorderTraversal(root, res);
+        // method 2: iterative
+        /*
+        stack<TreeNode*> stk;
+        //stk.push(root);
+        TreeNode* curNode = root;//->left;
+        while (!stk.empty() || curNode != nullptr) {
+            if (curNode != nullptr) {
+                stk.push(curNode);
+                curNode = curNode->left;
+            } else {
+                curNode = stk.top();
+                stk.pop();
+                res.push_back(curNode->val);
+                curNode = curNode->right;
+            }
+        }
+        return res;
+        */
+        // method 3: morris traversal
+        
+        return morrisInorder(root, res);
     }
     
-    // recursion
-    vector<int> inorderTraversal(TreeNode *root, vector<int> &res) {
+private:
+    vector<int> inorder(TreeNode* root, vector<int> &res) {
         if (root == nullptr) return res;
-        
-        inorderTraversal(root->left, res);
+        inorder (root->left, res);
         res.push_back(root->val);
-        inorderTraversal(root->right, res);
+        inorder (root->right, res);
         return res;
     }
     
-    //iterative
-    vector<int> inorderTraversal(TreeNode *root) {
-        // Note: The Solution object is instantiated only once and is reused by each test case.
-        vector<int> res;
-        if (root == nullptr) return res;
-        stack<TreeNode *> s;
-        s.push(root);
-        TreeNode *pNode = root->left;
-        while(!s.empty() || pNode!=nullptr){
-            if (pNode != nullptr) {
-                s.push(pNode);
-                pNode = pNode->left;
-            } else {
-                TreeNode *t = s.top();
-                s.pop();
-                res.push_back(t->val);
-                pNode = t->right;
+    vector<int> morrisInorder(TreeNode* root, vector<int> &res) {
+        TreeNode *cur = root;
+        while (cur) {
+            // If left child is null, print the current node data. Move to
+            // right child.
+            if (cur->left == nullptr) {
+                res.push_back(cur->val);
+                //prev = cur;
+                cur = cur->right;
+            }
+            else {
+                // find inoder predecessor
+                TreeNode *prev = cur->left;
+                while (prev->right && prev->right != cur) 
+                    prev = prev->right;
+                
+                // If the right child of inorder predecessor already points to
+                // this node
+                if (prev->right == cur) { // 左子树已遍历完，从左子节点回来
+                    res.push_back(cur->val);
+                    prev->right = nullptr;
+                    cur = cur->right;
+                } 
+                // If right child doesn't point to this node, then print this
+                // node and make right child point to this node
+                else {
+                    prev->right = cur;
+                    cur = cur->left;
+                }
             }
         }
         return res;

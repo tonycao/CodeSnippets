@@ -1,5 +1,5 @@
 /**
- * Definition for binary tree
+ * Definition for a binary tree node.
  * struct TreeNode {
  *     int val;
  *     TreeNode *left;
@@ -9,35 +9,72 @@
  */
 class Solution {
 public:
-    vector<int> preorder(TreeNode *root, vector<int> &res){
-        if(!root) return res;
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> res;
+        if (root == nullptr) return res;
+        // method 1: time~O(N), space~O(logN)
+        //preorder(root, res);
+        //return res;
+        
+        // method 2:iterative time~O(N), space~O(N) ?
+        /*
+        stack<TreeNode*> stk;
+        stk.push(root);
+        while (!stk.empty()) {
+            TreeNode *tmp = stk.top();
+            stk.pop();
+            if (tmp->right) stk.push(tmp->right);
+            if (tmp->left) stk.push(tmp->left);
+            res.push_back(tmp->val);
+        }
+        return res;
+        */
+        
+        // method 3: morris 
+        return morrisPreorder(root, res);
+    }
+    
+private:
+    void preorder(TreeNode* root, vector<int> &res) {
+        if (root == nullptr) return ;
         res.push_back(root->val);
         preorder(root->left, res);
         preorder(root->right, res);
-        return res;
     }
-    vector<int> preorderTraversal(TreeNode *root) {
-        // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.
-        vector<int> res;
-        // method 1: recursive, Time ~ O(N), Space ~ O(logN)
-        //return preorder(root, res);
+    
+    vector<int> morrisPreorder(TreeNode* root, vector<int> &res) {
+        TreeNode *cur = root, *prev;
         
-        // method 3: stack
-        stack<TreeNode*> nodeStack;
-        TreeNode* curr = root;
-        
-        if (curr != nullptr) nodeStack.push(curr);
-        
-        while(!nodeStack.empty()) {
-            curr = nodeStack.top();
-            nodeStack.pop();
-            res.push_back(curr->val);
-
-            if (curr->right != nullptr) nodeStack.push(curr->right);
-            if (curr->left != nullptr) nodeStack.push(curr->left);
+        while (cur) {
+            // If left child is null, print the current node data. Move to
+            // right child.
+            if (cur->left == nullptr) {
+                res.push_back(cur->val);
+                cur = cur->right;
+            } else {
+                // Find inorder predecessor 寻找该节点的前序节点
+                prev = cur->left;
+                while (prev->right && prev->right != cur) {
+                    prev = prev->right;
+                }
+                
+                // If the right child of inorder predecessor already points to
+                // this node
+                if (prev->right == cur) // 左子树已遍历完，从左子节点回来
+                {
+                    prev->right = nullptr;
+                    cur = cur->right;
+                }
+                
+                // If right child doesn't point to this node, then print this
+                // node and make right child point to this node
+                else {
+                    res.push_back(cur->val);
+                    prev->right = cur;
+                    cur = cur->left;
+                }
+            }
         }
-        
         return res;
     }
 };
