@@ -1,0 +1,9 @@
+IM_2D.png 2-dimensional image obtained by exporting one slice from 3D image IM.mha
+Use initial seef (34,35)
+Seg_IM.png contains expert segmentation
+
+IM.mha 64x64x64 float image section including ascending aorta
+
+Use initial seed (35,17,28)
+
+SegIM.mha 64x64x64 float image expert segmentation of ascending aorta
