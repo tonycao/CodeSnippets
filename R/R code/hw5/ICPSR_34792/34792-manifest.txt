@@ -1,0 +1,85 @@
+File Manifest for ICPSR 34792
+
+Iannotti, Ronald J. Health Behavior in School-Aged Children (HBSC), 2009-
+2010. ICPSR34792-v1. Ann Arbor, MI: Inter-university Consortium for
+Political and Social Research [distributor], 2013-11-20.
+http://doi.org/10.3886/ICPSR34792.v1
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34792-related_literature.txt        -       -         -       2014-09-25  -
+
+    34792-manifest.txt                  -       -         -       2014-09-26  -
+
+
+DS0001 Student Survey
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34792-0001-Codebook.pdf             -       -         -       2013-11-20  b1861b8d76d690bc6a7deb85ac288c4f
+
+    34792-0001-Data.dta                 -       12,642    250     2013-11-20  e802fe921972417eda44378f69c7f9c8
+
+    34792-0001-Data.rda                 -       12,642    250     2013-11-20  2a3c602dff83e54663b11e47765be222
+
+    34792-0001-Data.sav                 -       12,642    250     2013-11-20  9f9775002340cf43ed790faffea34199
+
+    34792-0001-Data.stc                 -       12,642    250     2013-11-20  124714742940dadff45b49db04ab7fbc
+
+    34792-0001-Data.tsv                 -       12,642    250     2013-11-20  fe76cac12be73d675878a4c97c8a6276
+
+    34792-0001-Data.txt                 529     12,642    250     2013-11-20  98ac9087c24041c5a0a9492c479169d6
+
+    34792-0001-Questionnaire.pdf        -       -         -       2013-11-20  92db9c6cf8045a4f6dbdbad5e70e04e1
+
+    34792-0001-Setup.dct                -       -         -       2013-11-20  4b53ddba56eed4ad6a29343525092258
+
+    34792-0001-Setup.do                 -       -         -       2013-11-20  f0f1feadce9ac246bfed1c30e1e0a162
+
+    34792-0001-Setup.sas                -       -         -       2013-11-20  b70b9e7355ec7bf3fb282a539f78932d
+
+    34792-0001-Setup.sps                -       -         -       2013-11-20  56ee3511ca30287097fad0d04882ca19
+
+    34792-0001-Supplemental_syntax.do   -       -         -       2013-11-20  a348e7ecc39a411e946c09879045f1b0
+
+    34792-0001-Supplemental_syntax.sas  -       -         -       2013-11-20  a213b19a946873b9f2dd8ed2e937d85b
+
+
+DS0002 School Administrator Survey
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34792-0002-Codebook.pdf             -       -         -       2013-11-20  f2bc317d7aa030e755710bd91135fa11
+
+    34792-0002-Data.dta                 -       314       223     2013-11-20  7485524f984a0df27f30803d6e4269d3
+
+    34792-0002-Data.rda                 -       314       223     2013-11-20  b703e57b5c102d247062befa2286e752
+
+    34792-0002-Data.sav                 -       314       223     2013-11-20  86fd0a412ad686da16a01b09003fb51d
+
+    34792-0002-Data.stc                 -       314       223     2013-11-20  6eeb84140fef25342c63588bf5660f7d
+
+    34792-0002-Data.tsv                 -       314       223     2013-11-20  6da978cf90983b6075a57d9c14b08996
+
+    34792-0002-Data.txt                 461     314       223     2013-11-20  2929db018039121953297dc5e9073f12
+
+    34792-0002-Questionnaire.pdf        -       -         -       2013-11-20  0baf91738533b977cbbe5c5f67aae206
+
+    34792-0002-Setup.dct                -       -         -       2013-11-20  bddd3eecad0a2481cfc81245190e4ac5
+
+    34792-0002-Setup.do                 -       -         -       2013-11-20  f1d05d3402c463436ea60fd2f39063e7
+
+    34792-0002-Setup.sas                -       -         -       2013-11-20  d50a22c739403ebfab6ebed18282185a
+
+    34792-0002-Setup.sps                -       -         -       2013-11-20  1c1b037886d9b12a1704dd13aa8b9344
+
+    34792-0002-Supplemental_syntax.do   -       -         -       2013-11-20  2be93463d3da4135cf7cf1c1dc11b1b8
+
+    34792-0002-Supplemental_syntax.sas  -       -         -       2013-11-20  e0c37057bee3aeee57fd638ffb6d5778
+

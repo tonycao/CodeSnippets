@@ -1,0 +1,132 @@
+
+> #########
+> # Plots showing decision boundaries
+> s <- sqrt(1/5)
+
+> set.seed(30)
+
+> makeX <- function(M, n=100, sigma=diag(2)*s) {
++   z <- sample(1:nrow(M), n, replace=TRUE)
++   m <- M[z,]
++   return(t(apply(m,1,function(mu) mvrnor .... [TRUNCATED] 
+
+> M0 <- mvrnorm(10, c(1,0), diag(2)) # generate 10 means
+
+> x0 <- makeX(M0) ## the final values for y0=blue
+
+> M1 <- mvrnorm(10, c(0,1), diag(2))
+
+> x1 <- makeX(M1)
+
+> x <- rbind(x0, x1)
+
+> y <- c(rep(0,100), rep(1,100))
+
+> cols <- mycols[y+1]
+
+> GS <- 75 # put data in a Gs x Gs grid
+
+> XLIM <- range(x[,1])
+
+> tmpx <- seq(XLIM[1], XLIM[2], len=GS)
+
+> YLIM <- range(x[,2])
+
+> tmpy <- seq(YLIM[1], YLIM[2], len=GS)
+
+> newx <- expand.grid(tmpx, tmpy)
+
+> # linear regression
+> 
+> # these are the covariates
+> X1 <- x[,1]
+
+> X2 <- x[,2]
+
+> linear.fit <- lm(y~X1+X2)
+
+> m <- -linear.fit$coef[2]/linear.fit$coef[3]
+
+> b <- (0.5 - linear.fit$coef[1])/linear.fit$coef[3]
+
+> # prediction on grid
+> yhat <- predict(linear.fit, newdata=data.frame(X1=newx[,1],X2=newx[,2])); yhat <- as.numeric(yhat>0.5)
+
+> colshat <- mycols[as.numeric(yhat>0.5)+1]
+
+> #### MAKE PNG HERE
+> png("Plots/classification-plots-01.png", width=864, height=864, pointsize=12)
+
+> par(mfrow=c(2,2), mgp=c(1.25,.5,0), mar=c(2.25, 2.1, 1,1))
+
+> plot(x,col=cols,xlab="X1",ylab="X2",xlim=XLIM,ylim=YLIM,type="n")
+
+> abline(b,m)
+
+> points(newx,col=colshat,pch=".")
+
+> points(x,col=cols)
+
+> title("Linear regression")
+
+> # KNN (1)
+> yhat <- knn(x, newx, y, k=1)
+
+> colshat <- mycols[as.numeric(yhat)]
+
+> plot(x, xlab="X1", ylab="X2", xlim=XLIM, ylim=YLIM, type="n")
+
+> points(newx, col=colshat, pch=".")
+
+> contour(tmpx, tmpy, matrix(as.numeric(yhat),GS,GS), levels=c(1,2), add=TRUE, drawlabels=FALSE)
+
+> points(x, col=cols)
+
+> title("KNN (1)")
+
+> # KNN (15)
+> yhat <- knn(x, newx, y, k=15)
+
+> colshat <- mycols[as.numeric(yhat)]
+
+> plot(x, xlab="X1", ylab="X2", xlim=XLIM, ylim=YLIM, type="n")
+
+> points(newx, col=colshat, pch=".")
+
+> contour(tmpx, tmpy, matrix(as.numeric(yhat),GS,GS), levels=c(1,2), add=TRUE, drawlabels=FALSE)
+
+> points(x, col=cols)
+
+> title("KNN (15)")
+
+> # Bayes classifier
+> # probability of Y given X
+> p <- function(x) {
++   p0 <- mean(dnorm(x[1], M0[,1], s) * dnorm(x[2], M0[,2], s))
++   p1 <- mean( .... [TRUNCATED] 
+
+> bayesrule <- apply(newx, 1, p)
+
+> colshat <- mycols[as.numeric(bayesrule>0.5)+1]
+
+> plot(x, xlab="X1", ylab="X2", xlim=XLIM, ylim=YLIM, type="n")
+
+> points(newx, col=colshat, pch=".")
+
+> contour(tmpx, tmpy, matrix(round(bayesrule),GS,GS), levels=c(1,2), add=TRUE, drawlabels=FALSE)
+
+> points(x, col=cols)
+
+> title("Bayes rule")
+
+> dev.off()
+
+> library(MASS)
+
+> library(RColorBrewer)
+
+> library(class)
+
+> mycols <- brewer.pal(8, "Dark2")[c(3,2)]
+
+> sink("classification-out.txt")

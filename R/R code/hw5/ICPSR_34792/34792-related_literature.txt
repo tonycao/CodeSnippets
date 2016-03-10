@@ -1,0 +1,27 @@
+Bibliography
+Health Behavior in School-Aged Children (HBSC), 2009-2010
+
+This bibliography includes published and unpublished works that are related 
+to ICPSR study 34792. It includes works that are based on primary
+or secondary analysis of the data, or which describe or critique those
+data or the collection methodology. This list represents all items known
+to ICPSR as of 2014-09-26.
+
+If you publish a work or know of other works that are based on these data,
+please send the complete citation and name of the ICPSR study used to:
+bibliography@icpsr.umich.edu.
+
+
+1. Brooks-Russell, Ashley; Farhat, Tilda; Haynie, Denise; Simons-Morton,
+Bruce, "Trends in substance use among 6th- to 10th-grade students from 1998
+to 2010: Findings from a national probability study." Journal of Early
+Adolescence. in press 2013,. DOI: 10.1177/0272431613501409
+
+2. Iannotti, Ronald, J.; Jing Wang, "Trends in physical activity, sedentary
+behavior, diet, and BMI among US adolescents, 2001-2009." Pediatrics. Oct
+2013, 132, (4), 606 - 614. DOI: 10.1542/peds.2013-1488
+
+3. Lipsky, Leah M.; Iannotti, Ronald J., "Associations of television
+viewing with eating behaviors in the 2009 Health Behaviour in School-aged
+Children Study." Archives of Pediatrics and Adolescent Medicine. May 2012,
+166, (5), 465 - 472. DOI: 10.1001/archpediatrics.2011.1407
