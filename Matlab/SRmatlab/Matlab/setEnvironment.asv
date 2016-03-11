@@ -1,0 +1,62 @@
+% function to set the environment for supre resolution project
+% Ce Liu
+
+% set the home path
+if ispc
+    Environment.Path.Home = 'D:\Workstation\CVPR2010\SuperResolution\';
+else
+    Environment.Path.Home = '/csail/vision-billf3/Ce/CVPR2010/SuperResolution/';
+    addpath('/csail/vision-billf3/Ce/CVPR2010/library');
+end
+
+% add the library for kdtree
+Environment.Path.kdtree = fullfile(Environment.Path.Home,'Matlab','kdtree');
+addpath(Environment.Path.kdtree);
+
+% if the kdtree library is not there then compile them
+cd(Environment.Path.kdtree);
+
+% set the path
+Environment.Path.Database           = fullfile(Environment.Path.Home,'Database');
+Environment.Path.Training.Home      = fullfile(Environment.Path.Database,'Training');
+Environment.Path.Training.Image     = fullfile(Environment.Path.Training.Home,'Image');
+Environment.Path.Test.Home          = fullfile(Environment.Path.Database,'Test');
+Environment.Path.Test.Image         = fullfile(Environment.Path.Test.Home,'Image');
+
+Environment.Path.Training.Laplacian = fullfile(Environment.Path.Training.Home,'Laplacian');
+Environment.Path.Test.Laplacian     = fullfile(Environment.Path.Test.Home,'Laplacian');
+Environment.Path.Training.Bandpass  = fullfile(Environment.Path.Training.Home,'Bandpass');
+Environment.Path.Test.Bandpass      = fullfile(Environment.Path.Test.Home,'Bandpass');
+
+Environment.Path.Test.Candidates    = fullfile(Environment.Path.Test.Home,'Candidates');
+Environment.Path.Test.Result        = fullfile(Environment.Path.Test.Home,'Result');
+
+if exist(Environment.Path.Training.Laplacian,'dir')~=7
+    mkdir(Environment.Path.Training.Laplacian);
+end
+if exist(Environment.Path.Test.Laplacian,'dir')~=7
+    mkdir(Environment.Path.Test.Laplacian);
+end
+if exist(Environment.Path.Training.Bandpass,'dir')~=7
+    mkdir(Environment.Path.Training.Bandpass);
+end
+if exist(Environment.Path.Test.Bandpass,'dir')~=7
+    mkdir(Environment.Path.Test.Bandpass);
+end
+
+if exist(Environment.Path.Test.Candidates,'dir')~=7
+    mkdir(Environment.Path.Test.Candidates);
+end
+if exist(Environment.Path.Test.Result,'dir')~=7
+    mkdir(Environment.Path.Test.Result);
+end
+
+% set the parameters
+
+Environment.Para.PatchSize.L = 7; % the low res patch should be equal to or greater than the high res
+Environment.Para.PatchSize.H = 4;
+Environment.Para.intervalSize = 2; % the interval size used to sample patches from training images
+Environment.Para.OverlapSize = 2;
+Environment.Para.NN = 20;          % the number of nearest neighbors
+Environment.IsKdtree = true;
+Environment.IsKdtreeGenerated = false;

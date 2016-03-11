@@ -1,0 +1,4 @@
+% function to contrast normalize an image
+function Im = imcontrastnormalize(im,wsize)
+
+Im = 
